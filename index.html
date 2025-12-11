@@ -1,0 +1,541 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Süleyman Efe Gümüşgül - Portfolyo</title>
+
+    <style>
+        /* --- GENEL AYARLAR --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header (Üst Kısım) */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #ecf0f1;
+            font-weight: 300;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255,255,255,0.3);
+            margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Ana Kapsayıcı */
+        .container {
+            max-width: 1000px; /* Genişliği biraz artırdım ki kutular sığsın */
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+            margin-top: -40px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        section {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+            section:last-child {
+                border-bottom: none;
+            }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        /* --- YENİ: İŞ DENEYİMİ TABLO/GRID TASARIMI --- */
+        .experience-grid {
+            display: grid;
+            /* Otomatik sığdır: Ekran genişse 3'lü, darsa 2'li veya 1'li olur */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .exp-card {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+            /* Kutuların üzerine gelince hafif kalksın */
+            .exp-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                border-color: #3498db;
+            }
+
+            /* Sol taraftaki renkli çizgi */
+            .exp-card::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 5px;
+                background: #3498db;
+            }
+
+        .exp-date {
+            background: #e3f2fd;
+            color: #1565c0;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .exp-card h3 {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .exp-card span {
+            color: #666;
+            font-size: 0.95rem;
+            display: block; /* Alt satıra indirir */
+        }
+
+
+        /* --- EĞİTİM İÇİN TIMELINE (Burası aynı kaldı) --- */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+            .timeline::before {
+                content: '';
+                position: absolute;
+                left: 10px;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: #e9ecef;
+            }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background: #7f8c8d; /* Eğitim için gri renk */
+            color: white;
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+            .timeline-date::before {
+                content: '';
+                position: absolute;
+                left: -36px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 15px;
+                height: 15px;
+                background: white;
+                border: 3px solid #7f8c8d;
+                border-radius: 50%;
+                z-index: 2;
+            }
+
+        .timeline-content h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        /* --- YETENEKLER --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 5px;
+            width: 0%;
+            animation: fillBar 1.5s ease-in-out forwards;
+        }
+
+        .software-fill {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+        }
+
+        .lang-fill {
+            background: linear-gradient(90deg, #43e97b, #38f9d7);
+        }
+
+        @keyframes fillBar {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: var(--target-width);
+            }
+        }
+
+        /* --- SERTİFİKALAR --- */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+
+            .cert-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .cert-img-box {
+            height: 160px;
+            overflow: hidden;
+        }
+
+            .cert-img-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .cert-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+            .cert-content h3 {
+                font-size: 1.1rem;
+                margin: 0 0 5px;
+            }
+
+        .institution {
+            color: #3498db;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .date {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* --- MOBİL UYUMLULUK --- */
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Mobilde alt alta dönsün */
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            margin: 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+        }
+
+            .btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+                opacity: 0.9;
+            }
+
+        .btn-email {
+            background: #ea4335;
+        }
+
+        .btn-linkedin {
+            background: #0077b5;
+        }
+
+        .btn-github {
+            background: #333;
+        }
+
+        .btn-insta {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+
+        .btn-cv {
+            background: #555;
+        }
+
+        .btn-print {
+            background: #27ae60;
+        }
+
+        @media print {
+            .btn-group, header, #contact h2, #contact p {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="C:\Users\süleyman\Desktop\ses kayded\site\WhatsApp Görsel 2025-11-05 saat 17.25.56_2a76dffb.jpg" alt="Süleyman Efe Gümüşgül" class="profile-img">
+        <h1>Süleyman Efe Gümüşgül</h1>
+        <p class="subtitle">Full Stack Developer & Sporcu</p>
+    </header>
+
+    <div class="container">
+
+        <section id="about">
+            <h2>Hakkımda</h2>
+            <p>Merhaba, ben Süleyman. 20 yaşında, teknolojiye ve kişisel gelişime odaklanmış biriyim. Kodlama dünyasındaki yenilikleri takip etmek, algoritmik düşünmek ve projeler geliştirmek en büyük ilgi alanım. Disiplin ve odaklanma gerektiren bu süreci, spor tutkumla dengeliyorum; sporun getirdiği dinamizm ve kararlılığı çalışma hayatıma da yansıtıyorum.</p>
+        </section>
+
+        <section id="experience">
+            <h2>İş Deneyimi</h2>
+            <div class="experience-grid">
+
+                <div class="exp-card">
+                    <span class="exp-date">2017 - Günümüz</span>
+                    <h3>Lisanslı Futbolcu</h3>
+                    <span>Futbol Takımı</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2023 - 2025</span>
+                    <h3>Resepsiyonist</h3>
+                    <span>Otel</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2021 - 2023</span>
+                    <h3>Garson</h3>
+                    <span>Kafeterya</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2020 - 2021</span>
+                    <h3>Alan Sorumlusu</h3>
+                    <span>İnşaat</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2019 - 2020</span>
+                    <h3>Teknik Servis</h3>
+                    <span>Casper</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2018 - 2019</span>
+                    <h3>Muhasebe</h3>
+                    <span>Otopark</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2017 - 2018</span>
+                    <h3>Mutfak Şefi</h3>
+                    <span>Restoran</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2015 - 2017</span>
+                    <h3>Komi</h3>
+                    <span>Restoran</span>
+                </div>
+
+                <div class="exp-card">
+                    <span class="exp-date">2014 - 2015</span>
+                    <h3>Muhasebe Yrd.</h3>
+                    <span>Bakkal</span>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Eğitim Geçmişi</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2025 - Günümüz</div>
+                    <div class="timeline-content"><h3>Dumlupınar Üniversitesi</h3><span>Öğrenci</span></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020 - 2024</div>
+                    <div class="timeline-content"><h3>Ayvalık Anadolu Lisesi</h3><span>Lise Öğrencisi</span></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2012 - 2020</div>
+                    <div class="timeline-content"><h3>Sakarya İlkokulu/Ortaokulu</h3><span>İlk ve Orta Öğretim</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Yetenekler & Diller</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>💻 Yazılım Dilleri</h3>
+                    <div class="skill-item"><div class="skill-header"><span>Python</span> <span>95%</span></div><div class="skill-bar"><div class="skill-fill software-fill" style="--target-width: 95%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>C# (C Sharp)</span> <span>85%</span></div><div class="skill-bar"><div class="skill-fill software-fill" style="--target-width: 85%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>C++</span> <span>80%</span></div><div class="skill-bar"><div class="skill-fill software-fill" style="--target-width: 80%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>HTML & CSS</span> <span>90%</span></div><div class="skill-bar"><div class="skill-fill software-fill" style="--target-width: 90%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>JavaScript</span> <span>75%</span></div><div class="skill-bar"><div class="skill-fill software-fill" style="--target-width: 75%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>C+ / C</span> <span>70%</span></div><div class="skill-bar"><div class="skill-fill software-fill" style="--target-width: 70%"></div></div></div>
+                </div>
+                <div class="skill-category">
+                    <h3>🌍 Yabancı Diller</h3>
+                    <div class="skill-item"><div class="skill-header"><span>İngilizce (B2)</span> <span>75%</span></div><div class="skill-bar"><div class="skill-fill lang-fill" style="--target-width: 75%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>Almanca (A2)</span> <span>40%</span></div><div class="skill-bar"><div class="skill-fill lang-fill" style="--target-width: 40%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>Fransızca (A2)</span> <span>40%</span></div><div class="skill-bar"><div class="skill-fill lang-fill" style="--target-width: 40%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>İspanyolca (A1)</span> <span>25%</span></div><div class="skill-bar"><div class="skill-fill lang-fill" style="--target-width: 25%"></div></div></div>
+                    <div class="skill-item"><div class="skill-header"><span>Diğerleri (İtalyanca, Rusça vb.)</span> <span>20%</span></div><div class="skill-bar"><div class="skill-fill lang-fill" style="--target-width: 20%"></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="certificates-section">
+            <h2 class="section-title">Sertifikalarım</h2>
+            <div class="cards-container">
+                <div class="cert-card">
+                    <div class="cert-img-box"><img src="C:\Users\süleyman\Desktop\ses kayded\site\UC-00f3a6c7-0229-4e01-a9c7-db47d7e1b2ec.jpg" alt="Python Sertifikası"></div>
+                    <div class="cert-content"><h3>İleri Seviye Python</h3><p class="institution">Udemy</p><p class="date">16 Ocak 2023</p></div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-img-box"><img src="C:\Users\süleyman\Desktop\ses kayded\site\lisans.jpg" alt="Spor Sertifikası"></div>
+                    <div class="cert-content"><h3>Fonksiyonel Antrenman</h3><p class="institution">Spor Federasyonu</p><p class="date">29 Eylül 2017</p></div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-img-box"><img src="https://via.placeholder.com/400x250/ffc107/000000?text=Web+Tasarim" alt="Web Tasarım Sertifikası"></div>
+                    <div class="cert-content"><h3>Web Geliştirme (HTML/CSS)</h3><p class="institution">BTK Akademi</p><p class="date">12 Aralık 2025</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="text-align: center;">
+            <h2>İletişim & Sosyal Medya</h2>
+            <p>Projelerinizde birlikte çalışmak veya tanışmak için:</p>
+
+            <div class="btn-group" style="margin: 25px 0;">
+                <a href="mailto:suleymangumusgul@gmail.com" class="btn btn-email">📧 E-posta Gönder</a>
+                <a href="https://www.linkedin.com/in/s%C3%BCleyman-g%C3%BCm%C3%BC%C5%9Fg%C3%BCl-78a861346/" target="_blank" class="btn btn-linkedin">Linkedin</a>
+                <a href="https://github.com/tyronista" target="_blank" class="btn btn-github">GitHub</a>
+                <a href="https://www.instagram.com/tyronista/" target="_blank" class="btn btn-insta">Instagram</a>
+            </div>
+
+            <br>
+            <div style="background: #f1f1f1; padding: 20px; border-radius: 10px; display: inline-block;">
+                <a href="cv.pdf" class="btn btn-cv" download>📄 CV'mi Dosya Olarak İndir (PDF)</a>
+                <p style="font-size: 0.8rem; margin: 10px 0 0; color: #666;">veya</p>
+                <button onclick="window.print()" class="btn btn-print">🖨️ Sayfayı PDF Olarak Kaydet</button>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
